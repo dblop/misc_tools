@@ -9,6 +9,8 @@ sudo sleep 10 # "sudo" before sleep elevates this script to sudo priviliges afte
 
 # Start with updates
 
+sudo add-apt-repository universe
+sudo add-apt-repository ppa:embrosyn/cinnamon # for Cinnamon
 sudo apt update
 sudo apt upgrade -y
 sudo apt full-upgrade -y
@@ -130,24 +132,25 @@ sudo apt install -y python3-gpg # Dropbox
 sudo apt install -y vulkan-utils
 sudo apt install -y x264
 
+# MPV Player
+
+sudo apt install git cmake gcc yasm build-essential autoconf libtool libfreetype-dev libfribidi-dev libfontconfig1-dev python libsdl2-2.0-0 libsdl2-dev libgnutls28-dev libva2 libva-dev vainfo libbluray-dev liblua5.3 liblua5.3-dev libdrm-dev libsdl2-dev libsdl2-mixer-dev libarchive-dev wayland-protocols libvdpau-dev libplacebo-dev libgdm-dev libluajit-5.1-dev -y
+git clone https://github.com/mpv-player/mpv-build.git && cd mpv-build
+./use-mpv-release
+./use-ffmpeg-release
+./rebuild -j8
+sudo ./install
+
+# Cinnamon
+
+sudo apt install cinnamon
+
 # Developer tools, useful for everyone, ex: for compiling software
 
 sudo apt install -y build-essential
 sudo apt install -y cmake
 sudo apt install -y git
 sudo apt install -y pkg-config
-
-# Itch stuff
-
-wget -O itch-setup nuts.itch.zone/download
-chmod 777 itch-setup
-./itch-setup --silent &
-
-# GitKraken stuff
-
-wget -O gitkraken.deb "https://release.gitkraken.com/linux/gitkraken-amd64.deb"
-sudo dpkg -i gitkraken.deb
-sudo rm -f gitkraken.deb
 
 # Discord stuff
 
@@ -160,6 +163,12 @@ sudo rm -f discord.deb
 wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
 sudo apt install -y ./google-chrome-stable_current_amd64.deb
 sudo rm -f google-chrome-stable_current_amd64.deb
+
+# Spotify 
+
+curl -sS https://download.spotify.com/debian/pubkey.gpg | sudo apt-key add - 
+echo "deb http://repository.spotify.com stable non-free" | sudo tee /etc/apt/sources.list.d/spotify.list
+sudo apt-get install spotify-client
 
 # Misc useful terminal stuff
 
