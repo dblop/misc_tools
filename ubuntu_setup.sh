@@ -229,6 +229,11 @@ sudo apt update
 sudo apt upgrade -y
 sudo apt full-upgrade -y
 
+# Fix my keyboard - letter z now has | and \
+
+echo "keycode 52 = z Z bar backslash bar backslash" > ~/.Xmodmap 
+xmodmap ~/.Xmodmap
+
 echo
 echo "Successfully installed the programs! "
 echo "You may wish to reboot your system now. "
